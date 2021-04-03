@@ -1,0 +1,39 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Games</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Cover</th>
+      <th>Name</th>
+      <th>Rule text</th>
+      <th>Pieces</th>
+      <th>Rule PDF</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @games.each do |game| %>
+      <tr>
+        <td> <%= image_tag(game.cover.variant(resize: "100x100").processed) %> </td>
+        <td><%= game.name %></td>
+        <td><%= game.rule_text %></td>
+        <td> 
+          <% game.pieces.each do |piece| %> 
+            <%= image_tag(piece.variant(resize: "100x100").processed) %>
+          <%end%>
+        </td>
+        <td> <%= link_to "Descargar reglas", game.rule, download: game.rule %> </td>
+        <td><%= link_to 'Show', game %></td>
+        <td><%= link_to 'Edit', edit_game_path(game) %></td>
+        <td><%= link_to 'Destroy', game, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Game', new_game_path %>

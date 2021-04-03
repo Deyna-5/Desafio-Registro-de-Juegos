@@ -1,0 +1,22 @@
+<p id="notice"><%= notice %></p>
+
+<div>
+  <h3><%= @game.name %></h3>
+  <p> <%= @game.rule_text %></p>
+
+  <h4>Portada del juego:</h4>
+  <%= image_tag(@game.cover.variant(resize: "100x100").processed) %>
+  <%= link_to "Descargar cover", @game.cover, download: @game.cover %>
+
+  <h5>Piezas del juego</h5>
+  <% @game.pieces.each do |piece| %> 
+    <%= image_tag(piece.variant(resize: "100x100").processed) %>
+    <%= link_to "Descargar piezas", piece, download: piece %>
+  <%end%>
+
+  <p>Reglas del juego:</p>
+  <%= link_to "Descargar reglas", @game.rule, download: @game.rule %> 
+</div>
+
+<%= link_to 'Edit', edit_game_path(@game) %> |
+<%= link_to 'Back', games_path %>
